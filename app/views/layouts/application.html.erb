@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Company App</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha256-9mbkOfVho3ZPXfM7W8sV2SndrGDuh7wuyLjtsWeTI1Q=" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha256-t8GepnyPmw9t+foMh3mKNvcorqNHamSKtKRxxpUEgFI=" crossorigin="anonymous"></script>
+    <script>
+      $(document).ready(function() {
+        $('.ui.dropdown').dropdown();
+      });
+      function openLogin() {
+        $('#login').modal('show');
+      }
+    </script>
+  </head>
+  <body>
+    <div class="ui content">
+    <div class="ui menu">
+      <div class="header item">Company App</div>
+      <% if user_signed_in? %>
+        <%= render partial: 'layouts/menu', collection: @menus, as: :menu %>
+        <div class="right menu">
+          <div class="ui dropdown item">
+            <%= current_user.email %> <i class="dropdown icon"></i>
+            <div class="menu">
+              <%= link_to 'Log Out', destroy_user_session_url, method: :delete, class: 'item' %>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <div class="right menu">
+          <a class='item' onClick="openLogin()"><i class="icon key"></i>Log in</a>
+        </div>
+      <% end %>
+    </div>
+    </div>
+    <%= yield %>
+  </body>
+</html>

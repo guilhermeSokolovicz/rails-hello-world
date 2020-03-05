@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+<h1>Roles</h1>
+<div class='ui grid'>
+<div class='sixteen wide column'>
+<table class="ui fixed table">
+  <thead> 
+    <tr>
+      <th class="seven wide">Name</th>
+      <th class="seven wide">Superior</th>
+      <th class="two wide right aligned"><%= link_to '<i class="plus icon"></i>'.html_safe, new_role_path, class: 'ui mini icon green button' %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @roles.each do |role| %>
+      <tr>
+        <td><%= link_to role.name, role %></td>
+        <td><%= role.superior.present?? link_to(role.superior.name, role.superior) : '' %></td>
+        <td class="right aligned">
+          <%= link_to '<i class="edit icon"></i>'.html_safe, edit_role_path(role), class: 'ui mini blue icon button' %>
+          <%= link_to '<i class="trash alternate icon"></i>'.html_safe, role, method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui mini red icon button' %>
+        </td>
+      </tr>
+      
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+

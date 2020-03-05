@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+<h1>Users</h1>
+<div class='ui grid'>
+<div class='sixteen wide column'>
+<table class="ui fixed table">
+  <thead> 
+    <tr>
+      <th class="sixten wide">Name</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+      </tr>
+      
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>

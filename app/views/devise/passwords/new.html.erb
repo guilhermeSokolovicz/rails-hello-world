@@ -1,0 +1,37 @@
+<script>
+  $(document).ready(function() {
+    $('#forgot').modal({
+      onHide: function(){
+        window.location.replace("<%= new_session_path(resource_name) %>");
+      }
+	  });
+    $('#forgot').modal('show');
+  });
+</script>
+<div class="ui modal" id="forgot">
+  <div class="content">
+    <div class="ui container full height">
+      <div class="ui grid middle aligned full height">
+        <div class='row'>
+          <div class="column">
+            <h2>Forgot your password?</h2>
+
+            <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'ui form' }) do |f| %>
+              <%= render "devise/shared/error_messages", resource: resource %>
+
+              <div class="field">
+                <%= f.label :email %>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+              </div>
+
+              <div class="actions">
+                <%= f.submit "Send me reset password instructions", class: 'ui blue button right floated'  %>
+              </div>
+            <% end %>
+            <%= render "devise/shared/links" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
